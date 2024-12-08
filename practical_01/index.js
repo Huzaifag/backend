@@ -1,44 +1,55 @@
-/*
-=> important npm commands:
-
-      npm init -y
-      npm install nodemon
-      npm install express
-      npm list express
-      npx nodemon index.js
-      npm install ejs
-      npm list ejs
+/* 
+File Handling in Node.js
+1.Writing to a file
+2.Reading from a file
+3.Appending to a file
+4.Deleting a file
+5.Create a folder
+6.Delete a folder   
+7.Read folder
 */
 
-//Importing the express module
-
-const express = require('express');
-const app = express();
-const path = require('path');
-
-//Setting up the middleware/parsers for our forms
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-//Setting up the static files
-app.use(express.static(path.join(__dirname, 'public')));
-
-//Setting up the view engine
-app.set('view engine', 'ejs');
-
-//Setting up the routes
-app.get('/', (req, res) => {
-    res.render('index');
+//1.Writing to a file
+const fs = require('fs');
+fs.writeFile('hello.txt','Hello World',(err)=>{
+    if(err) throw err;
+    console.log('File written successfully');
 });
 
-//Dynamic route
-
-app.get('/profile/:username',(req,res)=>{
-    const username = req.params.username;
-    res.send(`<h1>Welcome ${username}</h1>`);
-})
-
-// server is running on port 3000
-app.listen(3000, () => {
-    console.log('Server is running on port localhost:3000');
+//2.Reading from a file
+fs.readFile('hello.txt',(err,data)=>{
+    if(err) throw err;
+    console.log(data);
 });
+
+//3.Appending to a file
+fs.appendFile('hello.txt','Hello World',(err)=>{
+    if(err) throw err;
+    console.log('File appended successfully');
+}); 
+
+//4.Deleting a file
+fs.unlink('hello.txt',(err)=>{
+    if(err) throw err;
+    console.log('File deleted successfully');
+}); 
+
+//5.Create a folder
+fs.mkdir('myfolder',(err)=>{
+    if(err) throw err;
+    console.log('Folder created successfully');
+});
+
+//6.Delete a folder
+fs.rmdir('myfolder',(err)=>{
+    if(err) throw err;
+    console.log('Folder deleted successfully');
+}); 
+
+//7.Read folder
+fs.readdir('myfolder',(err,files)=>{
+    if(err) throw err;
+    console.log(files);
+}); 
+
+
