@@ -17,10 +17,10 @@ fs.writeFile('hello.txt','Hello World',(err)=>{
 });
 
 //2.Reading from a file
-fs.readFile('hello.txt',(err,data)=>{
+fs.readFile('./files/index.txt', (err, data)=>{
     if(err) throw err;
-    console.log(data);
-});
+    console.log(data.toString());
+})
 
 //3.Appending to a file
 fs.appendFile('hello.txt','Hello World',(err)=>{
